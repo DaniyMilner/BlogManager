@@ -1,0 +1,33 @@
+doctype html
+html(ng-app='blogApp')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black-translucent')
+    meta(name='format-detection', content='telephone=no')
+    meta(http-equiv='Cache-Control', content='no-cache, no-store, must-revalidate')
+    meta(http-equiv='Pragma', content='no-cache')
+    meta(http-equiv='Expires', content='0')
+    title Blog App
+    link(rel="stylesheet", href="/styles/importer.css")
+    link(rel='shortcut icon', href='images/favicon.ico', type='image/x-icon')
+  body(role='document')
+    include common/menu
+    .container.theme-showcase(role='main')
+      .jumbotron
+        h1 Hello, world!
+        p
+          | This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
+        p
+          a.btn.btn-primary.btn-lg(href='#', role='button') Learn more »
+    .content(ui-view='content')
+  script(src='/bower_components/sails.io.js/dist/sails.io.js')
+  script(src='/bower_components/jquery/dist/jquery.min.js')
+  script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+  script(src='/bower_components/angular/angular.min.js')
+  script(src='/bower_components/angular-ui-router/release/angular-ui-router.min.js')
+  script(src='/bower_components/angular-sails/dist/angular-sails.min.js')
+  script(src='/js/module.js')
+  script(src='/js/app.js')
+
