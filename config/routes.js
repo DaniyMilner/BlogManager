@@ -9,5 +9,6 @@ module.exports.routes = {
   '/views/:category/:file':{
     controller: 'index',
     action: 'partials'
-  }
+  },
+  'post /login': 'UserController.login'
 };
