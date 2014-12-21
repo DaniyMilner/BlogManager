@@ -1,0 +1,27 @@
+.row(ng-controller='registrationCtrl')
+    .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
+        form(role='form', name='registerForm')
+            h2
+                | Registration
+            h3(ng-if='isRegistered')
+                | Sign in with your email and password
+            .row(ng-if='!isRegistered')
+                .col-xs-12.col-sm-6.col-md-6
+                    .form-group(ng-class='{"has-success":registerForm.first_name.$valid, "has-error":!registerForm.first_name.$valid}')
+                        input#first_name.form-control.input-lg(ng-minlength="2", ng-maxlength="20", ng-pattern="/^[A-z][A-z0-9]*$/", required='', type='text', name='first_name', placeholder='First Name', tabindex='1', ng-model='user.firstName')
+                .col-xs-12.col-sm-6.col-md-6
+                    .form-group(ng-class='{"has-success":registerForm.last_name.$valid, "has-error":!registerForm.last_name.$valid}')
+                        input#last_name.form-control.input-lg(ng-minlength="2", ng-maxlength="20", ng-pattern="/^[A-z][A-z0-9]*$/", required='', type='text', name='last_name', placeholder='Last Name', tabindex='2', ng-model='user.secondName')
+            .form-group(ng-if='!isRegistered', ng-class='{"has-success":registerForm.email.$valid, "has-error":!registerForm.email.$valid}')
+                input#email.form-control.input-lg(required='', type='email', name='email', placeholder='Email Address', tabindex='4', ng-model='user.email')
+            .row
+                .col-xs-12.col-sm-6.col-md-6(ng-if='!isRegistered')
+                    .form-group(ng-class='{"has-success":registerForm.password.$valid, "has-error":!registerForm.password.$valid}')
+                        input#password.form-control.input-lg(ng-minlength="8", ng-maxlength="20", ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/", required='', type='password', name='password', placeholder='Password', tabindex='5', ng-model='user.password')
+                .col-xs-12.col-sm-6.col-md-6(ng-if='!isRegistered')
+                    .form-group(ng-class='{"has-success":registerForm.password_confirmation.$valid && !registerForm.password_confirmation.$error.match, "has-error":!registerForm.password_confirmation.$valid}')
+                        input#password_confirmation.form-control.input-lg(ng-minlength="8", ng-maxlength="20", ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/", required='', type='password', match='user.password', name='password_confirmation', placeholder='Confirm Password', tabindex='6', ng-model='user.confirmPass')
+                .col-xs-12.col-md-6(ng-if='!isRegistered')
+                    input.btn.btn-primary.btn-block.btn-lg(ng-enter, type='submit', value='Register', tabindex='7', ng-disabled="!registerForm.$valid", ng-click='register()')
+                .col-xs-12.col-md-6
+                    a.btn.btn-success.btn-block.btn-lg(ui-sref='login') Sign In

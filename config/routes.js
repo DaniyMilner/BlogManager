@@ -10,5 +10,7 @@ module.exports.routes = {
     controller: 'index',
     action: 'partials'
   },
-  'post /login': 'UserController.login'
+  'post /user/login': 'UserController.login',
+
+  'post /user/is-auth': 'UserController.isAuth'
 };

@@ -14,6 +14,6 @@ nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation', ng-controller='nav
                 li(ng-class='{active: $state.current.name == "office"}')
                     a(ui-sref='office') My Office
                 li
-                    a(ng-click='createUser()') Register
+                    a(ui-sref='registration') Register
                 li
-                    a(ng-click='login()') Login
+                    a(ui-sref='login') Login

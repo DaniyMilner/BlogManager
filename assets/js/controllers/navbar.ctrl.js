@@ -5,7 +5,7 @@ angular
 	.controller('navbarCtrl',
 		['$scope', '$sails', function($scope, $sails){
 			$scope.createUser = function(){
-				$sails.post('/create', {
+				$sails.post('/user/create', {
 					'email': 'alo@qapint.com',
 					'password': '111111'
 				}).success(function(data){
@@ -13,7 +13,7 @@ angular
 				});
 			};
 			$scope.login = function(){
-				$sails.post('/login', {
+				$sails.post('/user/login', {
 					'email': 'alo@qapint.com',
 					'password': '111111'
 				}).success(function(data){

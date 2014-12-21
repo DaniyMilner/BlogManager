@@ -22,5 +22,19 @@ angular
 						templateUrl: '/views/office/office'
 					}
 				}
+			}).state('registration', {
+				url: '/registration',
+				views: {
+					content: {
+						templateUrl: '/views/common/registration'
+					}
+				}
+			}).state('login', {
+				url: '/login',
+				views: {
+					content: {
+						templateUrl: '/views/common/login'
+					}
+				}
 			})
 	}]);
