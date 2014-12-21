@@ -1,19 +1,19 @@
 nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation', ng-controller='navbarCtrl')
-  .container
-    .navbar-header
-      button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
-        span.sr-only Toggle navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand(ui-sref='home') Blog Manager
-    #navbar.navbar-collapse.collapse
-      ul.nav.navbar-nav
-        li(ng-class='{active: $state.current.name == "home"}')
-          a(ui-sref='home') General Wall
-        li(ng-class='{active: $state.current.name == "office"}')
-          a(ui-sref='office') My Office
-        li
-          a(ng-click='createUser()') Register
-        li
-          a(ng-click='login()') Login
+    .container
+        .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+                span.sr-only Toggle navigation
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+            a.navbar-brand(ui-sref='home') Blog Manager
+        #navbar.navbar-collapse.collapse
+            ul.nav.navbar-nav
+                li(ng-class='{active: $state.current.name == "home"}')
+                    a(ui-sref='home') General Wall
+                li(ng-class='{active: $state.current.name == "office"}')
+                    a(ui-sref='office') My Office
+                li
+                    a(ng-click='createUser()') Register
+                li
+                    a(ng-click='login()') Login
