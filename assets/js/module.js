@@ -11,10 +11,15 @@ angular.module('blogApp', [
 				var checkAuth = function(toState){
 					$sails.post('/user/is-auth',{}).success(function(data){
 						if (data.error){
-							if (toState && toState.name != 'registration' && toState.name != 'login'){
+              $rootScope.$user = null;
+              if (!toState){
+                $state.go('home');
+              }else if (toState.name != 'registration' && toState.name != 'login'){
 								$state.go('home');
 							}
-						}
+						}else{
+              $rootScope.$user = data;
+            }
 					});
 				};
 				$rootScope.$state = $state;

@@ -14,7 +14,7 @@
                         input#last_name.form-control.input-lg(ng-minlength="2", ng-maxlength="20", ng-pattern="/^[A-z][A-z0-9]*$/", required='', type='text', name='last_name', placeholder='Last Name', tabindex='2', ng-model='user.secondName')
             .form-group(ng-if='!isRegistered', ng-class='{"has-success":registerForm.email.$valid, "has-error":!registerForm.email.$valid}')
                 input#email.form-control.input-lg(required='', type='email', name='email', placeholder='Email Address', tabindex='4', ng-model='user.email')
-            .row
+            .row.form-group
                 .col-xs-12.col-sm-6.col-md-6(ng-if='!isRegistered')
                     .form-group(ng-class='{"has-success":registerForm.password.$valid, "has-error":!registerForm.password.$valid}')
                         input#password.form-control.input-lg(ng-minlength="8", ng-maxlength="20", ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/", required='', type='password', name='password', placeholder='Password', tabindex='5', ng-model='user.password')
@@ -25,3 +25,5 @@
                     input.btn.btn-primary.btn-block.btn-lg(ng-enter, type='submit', value='Register', tabindex='7', ng-disabled="!registerForm.$valid", ng-click='register()')
                 .col-xs-12.col-md-6
                     a.btn.btn-success.btn-block.btn-lg(ui-sref='login') Sign In
+            .row
+                div.alert.alert-danger(role="alert", ng-if='wrongEmail') Wrong email

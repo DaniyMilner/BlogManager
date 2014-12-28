@@ -1,14 +1,13 @@
-.row
+.row(ng-controller='loginCtrl')
     .col-xs-12.col-sm-8.col-md-6.col-sm-offset-2.col-md-offset-3
         form.form-signin(role='form')
             h2
                 | Please sign in
             .form-group
-                input#email.form-control.input-lg(type='email', name='email', placeholder='Email address', tabindex='1', autofocus='')
+                input#email.form-control.input-lg(type='email', ng-model='user.email', name='email', placeholder='Email address', tabindex='1', autofocus='')
             .form-group
-                input#password.form-control.input-lg(type='password', name='password', placeholder='Password', tabindex='2')
-            .checkbox
-                label
-                    input(type='checkbox', value='remember-me')
-                    | Remember me
-            button.btn.btn-lg.btn-success.btn-block(type='submit') Sign in
+                input#password.form-control.input-lg(type='password', ng-model='user.password', name='password', placeholder='Password', tabindex='2')
+            .form-group
+                div.alert.alert-danger(role="alert", ng-if='isError') {{errorText}}
+            button.btn.btn-lg.btn-success.btn-block(type='submit', ng-click='login()') Sign in
+

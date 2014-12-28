@@ -19,9 +19,11 @@ angular
 						'email=' + $scope.user.email + '&' +
 						'password=' + $scope.user.password
 				).then(function(){
+            $scope.wrongEmail = false;
 						$scope.isRegistered = true;
-					});
-
+					}, function(){
+            $scope.wrongEmail = true;
+          });
 			};
 		}]
 	);

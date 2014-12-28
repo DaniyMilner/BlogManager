@@ -11,6 +11,7 @@ module.exports.routes = {
     action: 'partials'
   },
   'post /user/login': 'UserController.login',
+  'post /user/logout': 'UserController.logout',
 
   'post /user/is-auth': 'UserController.isAuth'
 };
