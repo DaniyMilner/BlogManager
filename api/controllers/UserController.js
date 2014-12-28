@@ -20,7 +20,7 @@ module.exports = {
             // password match
             req.session.user = user;
             req.session.authenticated = true;
-            res.json(user);
+            res.ok();
           }else{
             // invalid password
             if(req.session.user) req.session.user = null;
