@@ -1,9 +1,11 @@
 module.exports = {
   getAll: function(req, res){
     var current = req.body.current,
-      query = current && req.session.user ? {owner: req.session.user.id} : {};
+      limit = req.body.limit,
+      query = current && req.session.user ? {owner: req.session.user.id} : {},
+      queryLimit = limit ? limit : 0;
 
-    Post.find(query, function(err, data){
+    Post.find(query, {sort:{createdAt: -1}, limit: queryLimit}, function(err, data){
       if(!err){
         res.ok(data);
       }else{

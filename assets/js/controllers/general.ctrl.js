@@ -9,7 +9,6 @@ angular
       '/post/getall', {}
     ).then(function(data){
         $scope.posts = data;
-        console.log($scope.posts);
       });
 
   }]

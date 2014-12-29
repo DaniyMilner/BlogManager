@@ -1,4 +1,19 @@
 module.exports = {
+  get: function(req, res){
+    var id = req.body.id;
+
+    if(id){
+      User.findOne({id:id}, function(err, user){
+        if(!err){
+          res.ok(user);
+        }else{
+          res.serverError();
+        }
+      });
+    }else{
+      res.badRequest();
+    }
+  },
   isAuth: function(req, res){
     if(!req.session.authenticated || !req.session.user){
       res.json({error: 'User not authenticated'}, 409);

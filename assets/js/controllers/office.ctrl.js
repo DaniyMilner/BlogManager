@@ -4,21 +4,43 @@ angular
   .module('blogApp')
   .controller('officeCtrl',
   ['$scope', '$state', '$sails', function($scope, $state, $sails){
+    $scope.newPost = '';
     $scope.posts = [];
-    $sails.post(
-      '/post/getall', {
-        current: true
-      }
-    ).then(function(data){
-        $scope.posts = data;
-        console.log($scope.posts);
-      });
+
 
     $scope.createPost = function(){
-      $sails.post('/post/create', {text: 'ololo'})
+      $sails.post('/post/create', {text: $scope.newPost})
         .then(function(data){
-          console.log(data);
+          $scope.newPost = '';
+          $scope.posts.unshift(data);
         })
+    };
+
+    $scope.limitCount = 10;
+    $scope.loadMore = function(){
+      $scope.busy = true;
+      $sails.post(
+        '/post/getall', {
+          current: true,
+          limit: $scope.limitCount
+        }
+      ).then(function(data){
+          $scope.posts = data;
+          console.log($scope.posts);
+          $scope.busy = false;
+          $scope.limitCount += 10;
+          for(var i = 0; i < $scope.posts.length; i++){
+            (function(e){
+              $sails.post(
+                '/user/get', {
+                  id: $scope.posts[e].owner
+                }
+              ).then(function(user){
+                  $scope.posts[e].user = user;
+                });
+            })(i);
+          }
+        });
     };
   }]
 );

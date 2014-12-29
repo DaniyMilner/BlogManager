@@ -1,14 +1,22 @@
-angular.module('UserValidation', [])
-	.directive('ngEnter', function () {
-		return function (scope, element, attrs) {
-			element.bind("keydown keypress", function (event) {
-				if (event.which === 13) {
-					scope.$apply(function () {
-						scope.$eval(attrs.ngEnter);
-					});
-
-					event.preventDefault();
-				}
-			});
-		};
-	});
+angular.module('blogApp.directives', [])
+  .directive('enterSubmit', function () {
+    return {
+      restrict: 'A',
+      link: function (scope, elem, attrs) {
+        elem.bind('keydown', function(event) {
+          var code = event.keyCode || event.which;
+          if (code === 13) {
+            if (!event.shiftKey) {
+              event.preventDefault();
+              if (attrs.enterElement){
+                var btn = document.getElementById(attrs.enterElement);
+                if (btn && !btn.hasAttribute('disabled')){
+                  scope.$apply(attrs.enterSubmit);
+                }
+              }
+            }
+          }
+        });
+      }
+    }
+  });

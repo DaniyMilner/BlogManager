@@ -3,7 +3,9 @@
 angular.module('blogApp', [
 		'ui.router',
 		'ngSails',
-		'validation.match'
+		'validation.match',
+  'blogApp.directives',
+  'infinite-scroll'
 	])
 	.run(
 		['$rootScope', '$state', '$stateParams', '$sails',

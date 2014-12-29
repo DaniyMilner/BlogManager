@@ -1,10 +1,14 @@
 div(ng-controller='officeCtrl')
   h2 Office
-  div(ng-repeat='post in posts')
-    hr
-    div
-      span.text-muted {{post.updatedAt | date:"dd/MM/yyyy 'at' HH:mm:ss"}} by
-      span.text-primary {{post.owner}}
-    p {{post.text}}
-
-  button.btn.btn-success(ng-click='createPost()') Create
+  form(role='form')
+    div.row
+      .form-group
+        textarea.form-control(rows="3", ng-model='newPost', enter-submit="createPost()", enter-element='submitPost')
+      button#submitPost.btn.btn-success.pull-right(ng-disabled='newPost == ""',  ng-click='createPost()') Create
+  div(infinite-scroll="loadMore()", infinite-scroll-disabled='busy', infinite-scroll-distance="0")
+    div(ng-repeat='post in posts')
+      hr
+      div
+        p.text-muted {{post.updatedAt | date:"dd/MM/yyyy 'at' HH:mm:ss"}} by
+          span.text-primary  {{post.user.first_name}}
+      p {{post.text}}
