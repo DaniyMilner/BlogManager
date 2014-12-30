@@ -5,10 +5,10 @@ div(ng-controller='officeCtrl')
       .form-group
         textarea.form-control(rows="3", ng-model='newPost', enter-submit="createPost()", enter-element='submitPost')
       button#submitPost.btn.btn-success.pull-right(ng-disabled='newPost == ""',  ng-click='createPost()') Create
-  div(infinite-scroll="loadMore()", infinite-scroll-disabled='busy', infinite-scroll-distance="0")
+  div#scroll(infinite-scroll="loadMore()", can-load="busy" threshold="100")
     div(ng-repeat='post in posts')
       hr
       div
         p.text-muted {{post.updatedAt | date:"dd/MM/yyyy 'at' HH:mm:ss"}} by
-          span.text-primary  {{post.user.first_name}}
+          span.text-primary  {{post.user.first_name + ' ' + post.user.last_name}}
       p {{post.text}}

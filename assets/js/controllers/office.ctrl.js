@@ -26,7 +26,6 @@ angular
         }
       ).then(function(data){
           $scope.posts = data;
-          console.log($scope.posts);
           $scope.busy = false;
           $scope.limitCount += 10;
           for(var i = 0; i < $scope.posts.length; i++){
