@@ -3,7 +3,7 @@
 angular
   .module('blogApp')
   .controller('officeCtrl',
-  ['$scope', '$state', '$sails', function($scope, $state, $sails){
+  ['$scope', '$state', '$sails', '$http', function($scope, $state, $sails, $http){
     $scope.newPost = '';
     $scope.posts = [];
 
@@ -30,16 +30,31 @@ angular
           $scope.limitCount += 10;
           for(var i = 0; i < $scope.posts.length; i++){
             (function(e){
-              $sails.post(
-                '/user/get', {
-                  id: $scope.posts[e].owner
-                }
-              ).then(function(user){
-                  $scope.posts[e].user = user;
+              $http.get(
+                '/user/' + $scope.posts[e].owner
+              ).then(function(response){
+                  $scope.posts[e].user = response.data;
                 });
             })(i);
           }
         });
+    };
+
+    $scope.remove = function(id){
+      $http.delete(
+        '/post/' + id
+      ).then(function(){
+          for(var i = 0;i<$scope.posts.length;i++){
+            if ($scope.posts[i].id == id){
+              $scope.posts.splice(i, 1);
+              break;
+            }
+          }
+        });
+    };
+
+    $scope.edit = function(id){
+      console.log(id);
     };
   }]
 );
