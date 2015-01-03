@@ -11,7 +11,8 @@ div.office-wrapper(ng-controller='officeCtrl')
       div
         p.text-muted {{post.updatedAt | date:"dd/MM/yyyy 'at' HH:mm:ss"}} by
           span.text-primary  {{post.user.first_name + ' ' + post.user.last_name}}
-      p {{post.text}}
-      div.btn-wrapper
-        span.glyphicon.glyphicon-pencil(aria-hidden="true", ng-click='edit(post.id)')
+      p(ng-if="!post.editEnable") {{post.text}}
+      textarea.form-control(ng-if='post.editEnable', ng-model='post.text')
+      div.btn-wrapper(ng-if="!post.editEnable")
+        span.glyphicon.glyphicon-pencil(aria-hidden="true", ng-click='edit(post)')
         span.glyphicon.glyphicon-remove(aria-hidden="true", ng-click='remove(post.id)')

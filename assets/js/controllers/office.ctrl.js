@@ -44,8 +44,8 @@ angular
       $http.delete(
         '/post/' + id
       ).then(function(){
-          for(var i = 0;i<$scope.posts.length;i++){
-            if ($scope.posts[i].id == id){
+          for(var i = 0; i < $scope.posts.length; i++){
+            if($scope.posts[i].id == id){
               $scope.posts.splice(i, 1);
               break;
             }
@@ -53,8 +53,8 @@ angular
         });
     };
 
-    $scope.edit = function(id){
-      console.log(id);
+    $scope.edit = function(post){
+      post.editEnable = true;
     };
   }]
 );
