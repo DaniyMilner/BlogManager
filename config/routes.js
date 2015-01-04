@@ -15,6 +15,6 @@ module.exports.routes = {
   'post /user/is-auth': 'UserController.isAuth',
   'post /user/get': 'UserController.get',
 
-  'post /post/getall': 'PostController.getAll',
+  'post /post/getAllByPage': 'PostController.getAllByPage',
   'post /post/create': 'PostController.create'
 };

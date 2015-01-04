@@ -1,18 +1,16 @@
 module.exports = {
-  getAll: function(req, res){
+  getAllByPage: function(req, res){
     var current = req.body.current,
-      limit = req.body.limit,
-      query = current && req.session.user ? {owner: req.session.user.id} : {},
-      queryLimit = limit ? limit : 0;
+      page = req.body.paginate,
+      query = current && req.session.user ? {owner: req.session.user.id} : {};
 
-    Post.find(query, {sort:{createdAt: -1}, limit: queryLimit}, function(err, data){
+    Post.find(query, {sort:{createdAt: -1}}).paginate({page: page, limit: 10}).exec(function(err, data){
       if(!err){
         res.ok(data);
       }else{
         res.badRequest();
       }
-    })
-
+    });
   },
   create: function(req, res){
     var text = req.body.text;

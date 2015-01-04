@@ -15,26 +15,40 @@ angular
         })
     };
 
-    $scope.limitCount = 10;
+    $scope.page = 1;
     $scope.loadMore = function(){
       $scope.busy = true;
       $sails.post(
-        '/post/getall', {
+        '/post/getAllByPage', {
           current: true,
-          limit: $scope.limitCount
+          paginate: $scope.page
         }
       ).then(function(data){
-          $scope.posts = data;
-          $scope.busy = false;
-          $scope.limitCount += 10;
-          for(var i = 0; i < $scope.posts.length; i++){
+          for(var j = 0; j < data.length; j++){
             (function(e){
-              $http.get(
-                '/user/' + $scope.posts[e].owner
-              ).then(function(response){
-                  $scope.posts[e].user = response.data;
-                });
-            })(i);
+              var element = $scope.posts.filter(function(item){
+                return item.id == data[e].id;
+              })[0];
+              if(!element){
+                $scope.posts.push(data[e]);
+              }
+            })(j);
+          }
+          $scope.busy = false;
+          if(data.length){
+            $scope.page++;
+            for(var i = 0; i < data.length; i++){
+              (function(e){
+                $http.get(
+                  '/user/' + data[e].owner
+                ).then(function(response){
+                    var post = data.filter(function(item){
+                      return item.id == data[e].id;
+                    })[0];
+                    post.user = response.data;
+                  });
+              })(i);
+            }
           }
         });
     };
