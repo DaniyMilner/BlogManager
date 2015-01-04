@@ -4,7 +4,7 @@ div.office-wrapper(ng-controller='officeCtrl')
     div.row
       .form-group
         textarea.form-control(rows="3", ng-model='newPost', enter-submit="createPost()", enter-element='submitPost')
-      button#submitPost.btn.btn-success.pull-right(ng-disabled='newPost == ""',  ng-click='createPost()') Create
+      button#submitPost.btn.btn-success.pull-right(ng-disabled='newPost == ""', ng-click='createPost()') Create
   div(infinite-scroll="loadMore()", can-load="busy" threshold="100")
     div.post-wrapper(ng-repeat='post in posts')
       hr
@@ -12,7 +12,10 @@ div.office-wrapper(ng-controller='officeCtrl')
         p.text-muted {{post.updatedAt | date:"dd/MM/yyyy 'at' HH:mm:ss"}} by
           span.text-primary  {{post.user.first_name + ' ' + post.user.last_name}}
       p(ng-if="!post.editEnable") {{post.text}}
-      textarea.form-control(ng-if='post.editEnable', ng-model='post.text')
+      div.row
+        .form-group
+          textarea.form-control(ng-if='post.editEnable', ng-model='post.text', enter-submit="editPost(post)", enter-element='editPost')
+        button#editPost.btn.btn-success.pull-right(ng-if='post.editEnable', ng-disabled='post.text == ""', ng-click='editPost(post)') Save
       div.btn-wrapper(ng-if="!post.editEnable")
         span.glyphicon.glyphicon-pencil(aria-hidden="true", ng-click='edit(post)')
         span.glyphicon.glyphicon-remove(aria-hidden="true", ng-click='remove(post.id)')

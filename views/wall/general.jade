@@ -1,9 +1,9 @@
 div(ng-controller='generalCtrl')
   h2 General wall
-  div(ng-repeat='post in posts')
-    hr
-    div
-      span.text-muted {{post.updatedAt | date:"dd/MM/yyyy 'at' HH:mm:ss"}} by
-      span.text-primary {{post.owner}}
-    p {{post.text}}
-
+  div(infinite-scroll="loadMore()", can-load="busy" threshold="100")
+    div.post-wrapper(ng-repeat='post in posts')
+      hr
+      div
+        p.text-muted {{post.updatedAt | date:"dd/MM/yyyy 'at' HH:mm:ss"}} by
+          span.text-primary  {{post.user.first_name + ' ' + post.user.last_name}}
+      p(ng-if="!post.editEnable") {{post.text}}

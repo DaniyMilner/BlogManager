@@ -7,7 +7,6 @@ angular
     $scope.newPost = '';
     $scope.posts = [];
 
-
     $scope.createPost = function(){
       $sails.post('/post/create', {text: $scope.newPost})
         .then(function(data){
@@ -55,6 +54,15 @@ angular
 
     $scope.edit = function(post){
       post.editEnable = true;
+    };
+
+    $scope.editPost = function(post){
+      $sails.put(
+        '/post/' + post.id + '?text=' + post.text
+      ).then(function(data){
+          post.updatedAt = data.updatedAt;
+          delete post.editEnable;
+        });
     };
   }]
 );

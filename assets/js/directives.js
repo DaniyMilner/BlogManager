@@ -1,16 +1,16 @@
 angular.module('blogApp.directives', [])
-  .directive('enterSubmit', function () {
+  .directive('enterSubmit', function(){
     return {
       restrict: 'A',
-      link: function (scope, elem, attrs) {
-        elem.bind('keydown', function(event) {
+      link: function(scope, elem, attrs){
+        elem.bind('keydown', function(event){
           var code = event.keyCode || event.which;
-          if (code === 13) {
-            if (!event.shiftKey) {
+          if(code === 13){
+            if(!event.shiftKey){
               event.preventDefault();
-              if (attrs.enterElement){
+              if(attrs.enterElement){
                 var btn = document.getElementById(attrs.enterElement);
-                if (btn && !btn.hasAttribute('disabled')){
+                if(btn && !btn.hasAttribute('disabled')){
                   scope.$apply(attrs.enterSubmit);
                 }
               }
@@ -19,14 +19,14 @@ angular.module('blogApp.directives', [])
         });
       }
     }
-  }).directive('infiniteScroll', [function () {
+  }).directive('infiniteScroll', [function(){
     return {
-      link:function (scope, element, attrs) {
+      link: function(scope, element, attrs){
         var offset = parseInt(attrs.threshold) || 0;
         var e = element[0];
 
-        element.bind('scroll', function () {
-          if (scope.$eval(attrs.canLoad) && e.scrollTop + e.offsetHeight >= e.scrollHeight - offset) {
+        element.bind('scroll', function(){
+          if(scope.$eval(attrs.canLoad) && e.scrollTop + e.offsetHeight >= e.scrollHeight - offset){
             scope.$apply(attrs.infiniteScroll);
           }
         });
